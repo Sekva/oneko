@@ -43,9 +43,11 @@ typedef struct _AnimalDefaults {
   int cursor_width,cursor_height,cursor_x_hot,cursor_y_hot;
 } AnimalDefaultsData;
 
-AnimalDefaultsData AnimalDefaultsDataTable[] = 
+AnimalDefaultsData AnimalDefaultsDataTable[] =
 {
   { "neko", 13, 6, 32, 32, 125000L, 0, 0, mouse_cursor_bits,mouse_cursor_mask_bits,
+      mouse_cursor_width,mouse_cursor_height, mouse_cursor_x_hot,mouse_cursor_y_hot },
+  { "leko", 13, 6, 32, 32, 125000L, 0, 0, mouse_cursor_bits,mouse_cursor_mask_bits,
       mouse_cursor_width,mouse_cursor_height, mouse_cursor_x_hot,mouse_cursor_y_hot },
   { "tora", 16, 6, 32, 32, 125000L, 0, 0, mouse_cursor_bits,mouse_cursor_mask_bits,
       mouse_cursor_width,mouse_cursor_height, mouse_cursor_x_hot,mouse_cursor_y_hot },
@@ -441,7 +443,7 @@ MakeMouseCursor()
 
     theCursorSource
 	= XCreateBitmapFromData(theDisplay, theRoot,
-				AnimalDefaultsDataTable[NekoMoyou].cursor, 
+				AnimalDefaultsDataTable[NekoMoyou].cursor,
 				AnimalDefaultsDataTable[NekoMoyou].cursor_width,
 				AnimalDefaultsDataTable[NekoMoyou].cursor_height);
 
@@ -543,7 +545,7 @@ Window Select_Window(dpy)
 	buttons--;
        break;
     }
-  } 
+  }
 
   XUngrabPointer(dpy, CurrentTime);      /* Done with pointer */
 
@@ -699,7 +701,7 @@ InitScreen(DisplayName)
 
   InitBitmapAndGCs();
 
-  XSelectInput(theDisplay, theWindow, 
+  XSelectInput(theDisplay, theWindow,
 	       ExposureMask|VisibilityChangeMask|KeyPressMask);
 
   XFlush(theDisplay);
@@ -955,7 +957,7 @@ IsNekoMoveStart()
 {
     if ((PrevMouseX >= MouseX - IdleSpace
 	 && PrevMouseX <= MouseX + IdleSpace) &&
-	 (PrevMouseY >= MouseY - IdleSpace 
+	 (PrevMouseY >= MouseY - IdleSpace
 	 && PrevMouseY <= MouseY + IdleSpace) &&
 	(PrevTarget == theTarget)) {
 	return(False);
@@ -1032,9 +1034,9 @@ CalcDxDy()
 	RestoreCursor();
       }
 
-      if (theTargetAttributes.x+theTargetAttributes.width > 0 
+      if (theTargetAttributes.x+theTargetAttributes.width > 0
 	  && theTargetAttributes.x < (int)WindowWidth
-	  && theTargetAttributes.y+theTargetAttributes.height > 0 
+	  && theTargetAttributes.y+theTargetAttributes.height > 0
 	  && theTargetAttributes.y < (int)WindowHeight
 	  && theTargetAttributes.map_state == IsViewable) {
 	if (ToFocus) {
@@ -1044,18 +1046,18 @@ CalcDxDy()
 		   -BITMAP_WIDTH/2)
 	    LargeX = (double)(theTargetAttributes.x + theTargetAttributes.width
 			      + XOffset - NekoX - BITMAP_WIDTH);
-	  else 
+	  else
 	    LargeX = (double)(MouseX - NekoX - BITMAP_WIDTH / 2);
 
 	  LargeY = (double)(theTargetAttributes.y
 			    + YOffset - NekoY - BITMAP_HEIGHT);
 	}
 	else {
-	  MouseX = theTargetAttributes.x 
+	  MouseX = theTargetAttributes.x
 	    + theTargetAttributes.width / 2 + XOffset;
 	  MouseY = theTargetAttributes.y + YOffset;
 	  LargeX = (double)(MouseX - NekoX - BITMAP_WIDTH / 2);
-	  LargeY = (double)(MouseY - NekoY - BITMAP_HEIGHT);	
+	  LargeY = (double)(MouseY - NekoY - BITMAP_HEIGHT);
 	}
       }
       else {
@@ -1121,7 +1123,7 @@ NekoThinkDraw()
 		   || (ToFocus && theTarget != None && NekoY > MouseY)){
 	    SetNekoState(NEKO_U_TOGI);
 	} else if ((NekoMoveDy > 0 && NekoY >= WindowHeight - BITMAP_HEIGHT)
-		   || (ToFocus && theTarget != None 
+		   || (ToFocus && theTarget != None
 		       &&  NekoY < MouseY - BITMAP_HEIGHT)){
 	    SetNekoState(NEKO_D_TOGI);
 	} else {
@@ -1276,7 +1278,7 @@ ProcessEvent()
 	    if (RaiseWindowDelay==0) {
 	      XRaiseWindow(theDisplay,theWindow);
 	      RaiseWindowDelay=DEFAULT_RAISE_WAIT;
-	    } 
+	    }
 	default:
 	    /* Unknown Event */
 	    break;

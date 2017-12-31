@@ -34,6 +34,7 @@
  */
 
 #include "bitmaps/neko/neko.include"
+#include "bitmaps/leko/leko.include"
 #include "bitmaps/tora/tora.include"
 #include "bitmaps/dog/dog.include"
 #include "bitmaps/bsd/bsd.include"
@@ -43,6 +44,7 @@
 /* These are the bitmasks that allow the use of the shape extension. */
 
 #include "bitmasks/neko/neko.mask.include"
+#include "bitmasks/leko/leko.mask.include"
 #include "bitmasks/dog/dog.mask.include"
 #include "bitmasks/bsd/bsd.mask.include"
 #include "bitmasks/sakura/sakura.mask.include"
